@@ -1,67 +1,229 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CAP Garland, LLC</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veteran Land Solutions LLC</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f0f0f0;
-      color: #333;
-    }
+    * {margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif;}
+    body {background:#fff; color:#333; line-height:1.6; transition: background 0.3s, color 0.3s;}
+    body.dark {background:#121212; color:#ddd;}
     header {
-      background-color: #003366;
-      color: white;
-      padding: 30px 20px;
+      height: 100vh;
+      position: relative;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: url('https://media.istockphoto.com/id/1015448606/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%88%D0%BA%D0%B0%D1%84-%D0%B3%D0%B5%D1%80%D0%BE%D0%B5%D0%B2.jpg?s=612x612&w=0&k=20&c=-ZPCRCs5jUwckrYqlVXboLj_eWEjZklvPAxnif_UeQE=') center/cover no-repeat;
+      overflow: hidden;
     }
+    header::before {
+      content:"";
+      position: absolute;
+      top:0; left:0; right:0; bottom:0;
+      background:rgba(0,0,0,0.4);
+    }
+    header h1, header p, header a {
+      z-index: 1;
+      position: relative;
+      color: #fff;
+    }
+    header h1 {font-size:2.8rem; margin-bottom: .5rem;}
+    header p {font-size: 1.2rem;}
+    .cta-btn {
+      margin-top: 1rem;
+      background: crimson;
+      padding: .8rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+    .cta-btn:hover {background: #ff4f4f;}
+    #modeToggle {
+      position: fixed;
+      top:1rem;
+      right:1rem;
+      background:#fff;
+      border:none;
+      padding:.5rem 1rem;
+      border-radius: 50px;
+      cursor:pointer;
+      font-weight: bold;
+      z-index:1000;
+    }
+    body.dark #modeToggle {background:#333; color:#fff;}
     section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 0 20px;
+      padding:4rem 1rem;
+      text-align:center;
     }
-    h1, h2 {
-      color: #003366;
+    section h2 {font-size:2rem; color: crimson; margin-bottom:2rem;}
+    .slider {
+      position: relative;
+      max-width:800px;
+      margin:0 auto;
+      overflow: hidden;
+      border-radius: 10px;
     }
-    .contact {
-      background: #fff;
-      padding: 20px;
-      border-left: 5px solid #003366;
-      margin-top: 30px;
+    .slides {
+      display: flex;
+      width: 300%;
+      animation: slide 9s infinite;
     }
-    footer {
-      background-color: #003366;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 50px;
+    .slides img {
+      width: 100%;
+      flex-shrink: 0;
+    }
+    @keyframes slide {
+      0% {transform: translateX(0);}
+      33% {transform: translateX(-100%);}
+      66% {transform: translateX(-200%);}
+      100% {transform: translateX(0);}
+    }
+    .features {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap:1.5rem;
+      margin-top:2rem;
+    }
+    .features div {
+      background:#f9f9f9;
+      padding:1.5rem;
+      border-radius:10px;
+      transition: transform .3s;
+    }
+    body.dark .features div {background:#1f1f1f;}
+    .features div:hover {transform:translateY(-5px);}
+    /* Chat Widget */
+    #chatWidget {
+      position:fixed;
+      bottom:1rem;
+      right:1rem;
+      background:crimson;
+      color:#fff;
+      border:none;
+      padding:1rem;
+      border-radius:50%;
+      cursor:pointer;
+      z-index:1000;
+    }
+    #chatBox {
+      display:none;
+      position:fixed;
+      bottom:4.5rem;
+      right:1rem;
+      background:#fff;
+      width:250px;
+      height:300px;
+      border-radius:10px;
+      box-shadow:0 4px 8px rgba(0,0,0,0.2);
+      overflow:hidden;
+      flex-direction:column;
+    }
+    #chatBox.dark {background:#222; color:#fff;}
+    #chatBox header {
+      background:crimson;
+      padding:1rem;
+      color:#fff;
+      text-align:center;
+      font-weight:bold;
+    }
+    #chatMessages {
+      flex:1;
+      padding:1rem;
+      font-size:.9rem;
+      overflow-y:auto;
+    }
+    #chatInput {
+      border:none;
+      padding:.5rem;
+      width:100%;
+      outline:none;
+      border-top:1px solid #ccc;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>CAP Garland, LLC</h1>
-    <p>Private Investment Fund</p>
+  <button id="modeToggle">Dark/Light</button>
+  <header id="hero">
+    <h1>Veteran Land Solutions LLC</h1>
+    <p>Your trusted partner in premium clothes solutions.</p>
+    <a href="#slider" class="cta-btn">Explore</a>
   </header>
 
-  <section>
-    <h2>About Us</h2>
-    <p>CAP Garland, LLC is a Washington-based private investment fund focused on delivering value through diversified investment strategies.</p>
-
-    <h2>Contact</h2>
-    <div class="contact">
-      <p><strong>Address:</strong> 915 W 2nd Ave, Spokane, WA 99201</p>
-      <p><strong>Email:</strong> <a href="mailto:ryanberg@capgarland.shop">ryanberg@capgarland.shop</a></p>
-      <p><strong>Phone:</strong> (509) 822-3850</p>
+  <section id="slider">
+    <h2>Our Collection</h2>
+    <div class="slider">
+      <div class="slides">
+        <img src="https://media.istockphoto.com/id/1015448606/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%88%D0%BA%D0%B0%D1%84-%D0%B3%D0%B5%D1%80%D0%BE%D0%B5%D0%B2.jpg?s=612x612&w=0&k=20&c=-ZPCRCs5jUwckrYqlVXboLj_eWEjZklvPAxnif_UeQE=" alt="slide1">
+        <img src="https://astv.ru/content/NewsImage/36/87/36879781-c0cb-4ede-822f-2000a572f1c0_3.jpg" alt="slide2">
+        <img src="https://avatars.mds.yandex.net/i?id=8845c5224acd767e5157130b2a47f6b15a9583a6-5296855-images-thumbs&n=13" alt="slide3">
+      </div>
     </div>
   </section>
 
-  <footer>
-    &copy; 2025 CAP Garland, LLC. All rights reserved.
+  <section>
+    <h2>Why Choose Us</h2>
+    <div class="features">
+      <div><h3>Premium Quality</h3><p>Only the best materials for your style.</p></div>
+      <div><h3>Unique Designs</h3><p>Stand out with our modern collections.</p></div>
+      <div><h3>Trusted Service</h3><p>We value every customer like family.</p></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p><strong>Phone:</strong> 9379601898</p>
+    <p><strong>Email:</strong> <a href="mailto:contact@vlsolutions.shop">contact@vlsolutions.shop</a></p>
+  </section>
+
+  <footer style="text-align:center; padding:1rem; background:#f1f1f1;">
+    &copy; 2025 Veteran Land Solutions LLC. All Rights Reserved.
   </footer>
+
+  <!-- Chat Widget -->
+  <button id="chatWidget">💬</button>
+  <div id="chatBox">
+    <header>Chat with us</header>
+    <div id="chatMessages">Hi! How can we help you today?</div>
+    <input type="text" id="chatInput" placeholder="Type a message...">
+  </div>
+
+  <script>
+    // Dark/Light Mode
+    const toggleBtn = document.getElementById('modeToggle');
+    toggleBtn.addEventListener('click',()=>{
+      document.body.classList.toggle('dark');
+      document.getElementById('chatBox').classList.toggle('dark');
+    });
+
+    // Chat Widget Toggle
+    const chatWidget = document.getElementById('chatWidget');
+    const chatBox = document.getElementById('chatBox');
+    chatWidget.addEventListener('click', ()=>{
+      chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Chat Input
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+    chatInput.addEventListener('keypress', e=>{
+      if(e.key==='Enter' && chatInput.value.trim()!==''){
+        chatMessages.innerHTML += `<div>You: ${chatInput.value}</div>`;
+        chatInput.value='';
+      }
+    });
+
+    // Parallax effect on hero
+    const hero = document.getElementById('hero');
+    document.addEventListener('mousemove', (e)=>{
+      let x = (e.clientX / window.innerWidth - 0.5) * 20;
+      let y = (e.clientY / window.innerHeight - 0.5) * 20;
+      hero.style.backgroundPosition = `${50+x}% ${50+y}%`;
+    });
+  </script>
 </body>
 </html>
